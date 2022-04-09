@@ -21,7 +21,7 @@ class GameViewController: UIViewController {
     var tempStringPoints = ""
     var tempIntPoints = 0
     var hitCounter = 1
-    var dealerHandCount = 0
+    var dealerHandCount = 1
     var cardCount = 0;
     
     var deck:[Int] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
@@ -71,8 +71,8 @@ class GameViewController: UIViewController {
             tempPIntScore = Int(tempPStringScore) ?? 0
             tempPIntScore += pScore
             playerScore.text = "\(tempPIntScore)"
-            tempPStringScore = ""
-            tempPIntScore = 0
+            //tempPStringScore = ""
+            //tempPIntScore = 0
             
             //card = Int.random(in: 1...52)
             //card = card + 1
@@ -86,8 +86,8 @@ class GameViewController: UIViewController {
             tempPIntScore = Int(tempPStringScore) ?? 0
             tempPIntScore += pScore
             playerScore.text = "\(tempPIntScore)"
-            tempPStringScore = ""
-            tempPIntScore = 0
+            //tempPStringScore = ""
+            //tempPIntScore = 0
             
             //card = Int.random(in: 1...52)
             //card = card + 1
@@ -101,8 +101,8 @@ class GameViewController: UIViewController {
             tempDIntScore = Int(tempDStringScore) ?? 0
             tempDIntScore += dScore
             dealerScore.text = "\(tempDIntScore)"
-            tempDStringScore = ""
-            tempDIntScore = 0
+            //tempDStringScore = ""
+            //tempDIntScore = 0
             
             //card = Int.random(in: 1...52)
             //card = card + 1
@@ -116,8 +116,8 @@ class GameViewController: UIViewController {
             tempDIntScore = Int(tempDStringScore) ?? 0
             tempDIntScore += dScore
             dealerScore.text = "\(tempDIntScore)"
-            tempDStringScore = ""
-            tempDIntScore = 0
+            //tempDStringScore = ""
+            //tempDIntScore = 0
         } else {
             let alert = UIAlertController(title: "NOT ENOUGH POINTS", message: "Time to go back to work!!", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Restart", style: .default, handler: { action in
@@ -157,8 +157,8 @@ class GameViewController: UIViewController {
             tempPIntScore = Int(tempPStringScore) ?? 0
             tempPIntScore += pScore
             playerScore.text = "\(tempPIntScore)"
-            tempPStringScore = ""
-            tempPIntScore = 0
+            //tempPStringScore = ""
+            //tempPIntScore = 0
             playerCard3.isHidden = false
             PlayerBust()
         case 2:
@@ -175,8 +175,8 @@ class GameViewController: UIViewController {
             tempPIntScore = Int(tempPStringScore) ?? 0
             tempPIntScore += pScore
             playerScore.text = "\(tempPIntScore)"
-            tempPStringScore = ""
-            tempPIntScore = 0
+            //tempPStringScore = ""
+            //tempPIntScore = 0
             playerCard4.isHidden = false
             PlayerBust()
         case 3:
@@ -193,8 +193,8 @@ class GameViewController: UIViewController {
             tempPIntScore = Int(tempPStringScore) ?? 0
             tempPIntScore += pScore
             playerScore.text = "\(tempPIntScore)"
-            tempPStringScore = ""
-            tempPIntScore = 0
+            //tempPStringScore = ""
+            //tempPIntScore = 0
             playerCard5.isHidden = false
             PlayerBust()
         default:
@@ -255,8 +255,8 @@ class GameViewController: UIViewController {
                 self.Restart() }))
             self.present(alert, animated: true, completion: nil)
         }
-        tempPStringScore = ""
-        tempPIntScore = 0
+        //tempPStringScore = ""
+        //tempPIntScore = 0
         
     }
     
@@ -280,8 +280,8 @@ class GameViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         
         }
-        tempDStringScore = ""
-        tempDIntScore = 0
+//        tempDStringScore = ""
+//        tempDIntScore = 0
     }
     
     func DealerDeal(){
@@ -381,7 +381,6 @@ class GameViewController: UIViewController {
     }
     
     func Stay(){
-        dealerHandCount = 1;
         tempPStringScore = playerScore.text ?? ""
         tempPIntScore = Int(tempPStringScore) ?? 0
         tempDStringScore = dealerScore.text ?? ""
@@ -403,31 +402,12 @@ class GameViewController: UIViewController {
             
         }
         
-        while tempDIntScore <= tempPIntScore && tempDIntScore <= 21 && dealerHandCount <= 3 {
+        while tempDIntScore <= tempPIntScore && tempDIntScore <= 21 && dealerHandCount < 4 {
             
             
             DealerDeal()
             dealerHandCount += 1
-            
-            if tempPIntScore <= tempDIntScore {
-                buttonHit.isHidden = true;
-                buttonStay.isHidden = true;
-                
-                
-                tempStringPoints = playerPoints.text ?? ""
-                tempIntPoints = Int(tempStringPoints) ?? 0
-                tempIntPoints = tempIntPoints - 50
-                playerPoints.text = "\(tempIntPoints)"
-                
-                let alert = UIAlertController(title: "DEALER WINS!", message: "Smart play...", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Restart", style: .default, handler: { action in
-                    self.Restart() }))
-                self.present(alert, animated: true, completion: nil)
-                break;
-         
-            }
-            
-            
+        
             if tempDIntScore > 21 {
                 buttonHit.isHidden = true;
                 buttonStay.isHidden = true;
