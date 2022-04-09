@@ -16,12 +16,17 @@ class GameViewController: UIViewController {
     var dScore = 0
     var tempStringScore = ""
     var tempIntScore = 0
+    var tempStringPoints = ""
+    var tempIntPoints = 0
     var hitCounter = 1
         
     @IBOutlet weak var playerPoints: UILabel!
     @IBOutlet weak var buttonHit: UIButton!
     @IBOutlet weak var buttonStay: UIButton!
+   
+    @IBOutlet weak var buttonRestart: UIButton!
     @IBOutlet weak var buttonStart: UIButton!
+    
     
     @IBOutlet weak var dealerCard1: UIImageView!
     @IBOutlet weak var dealerCard2: UIImageView!
@@ -32,58 +37,95 @@ class GameViewController: UIViewController {
     @IBOutlet weak var dealerScore: UILabel!
     
     
+    @IBAction func btnRestart(_ sender: UIButton) {
+        
+        buttonRestart.isHidden = true
+        buttonStart.isHidden = false
+        dealerScore.text = "0"
+        playerScore.text = "0"
+        playerCard1.image = UIImage(named: "deck_3.png")
+        playerCard2.image = UIImage(named: "deck_3.png")
+        playerCard3.image = UIImage(named: "deck_3.png")
+        playerCard4.image = UIImage(named: "deck_3.png")
+        playerCard5.image = UIImage(named: "deck_3.png")
+        dealerCard1.image = UIImage(named: "deck_3.png")
+        dealerCard2.image = UIImage(named: "deck_3.png")
+        dealerCard3.image = UIImage(named: "deck_3.png")
+        dealerCard4.image = UIImage(named: "deck_3.png")
+        dealerCard5.image = UIImage(named: "deck_3.png")
+        
+        
+    }
+    
+    
     @IBAction func btnStart(_ sender: UIButton) {
-        buttonStart.isHidden = true
-        buttonHit.isHidden = false
-        buttonStay.isHidden = false
         
-        card = Int.random(in: 1...52)
+        tempStringPoints = playerPoints.text ?? ""
+        tempIntPoints = Int(tempStringPoints) ?? 0
         
-        let pCard1 = SetCard(c: card)
-        playerCard1.image = UIImage(named: "\(pCard1)")
-        pScore = GetValue(v: pCard1)
-        tempStringScore = playerScore.text ?? ""
-        tempIntScore = Int(tempStringScore) ?? 0
-        tempIntScore += pScore
-        playerScore.text = "\(tempIntScore)"
-        tempStringScore = ""
-        tempIntScore = 0
-        
-        card = Int.random(in: 1...52)
-        
-        let pCard2 = SetCard(c: card)
-        playerCard2.image = UIImage(named: "\(pCard2)")
-        pScore = GetValue(v: pCard2)
-        tempStringScore = playerScore.text ?? ""
-        tempIntScore = Int(tempStringScore) ?? 0
-        tempIntScore += pScore
-        playerScore.text = "\(tempIntScore)"
-        tempStringScore = ""
-        tempIntScore = 0
-        
-        card = Int.random(in: 1...52)
-        
-        let dCard1 = SetCard(c: card)
-        dealerCard1.image = UIImage(named: "\(dCard1)")
-        dScore = GetValue(v: dCard1)
-        tempStringScore = dealerScore.text ?? ""
-        tempIntScore = Int(tempStringScore) ?? 0
-        tempIntScore += dScore
-        dealerScore.text = "\(tempIntScore)"
-        tempStringScore = ""
-        tempIntScore = 0
-        
-        card = Int.random(in: 1...52)
-        
-        let dCard2 = SetCard(c: card)
-        dealerCard2.image = UIImage(named: "\(dCard2)")
-        dScore = GetValue(v: dCard2)
-        tempStringScore = dealerScore.text ?? ""
-        tempIntScore = Int(tempStringScore) ?? 0
-        tempIntScore += dScore
-        dealerScore.text = "\(tempIntScore)"
-        tempStringScore = ""
-        tempIntScore = 0
+        if tempIntPoints >= 50 {
+            
+            buttonStart.isHidden = true
+            buttonHit.isHidden = false
+            buttonStay.isHidden = false
+            
+            playerPoints.text = "500"
+            
+            card = Int.random(in: 1...52)
+            
+            let pCard1 = SetCard(c: card)
+            playerCard1.image = UIImage(named: "\(pCard1)")
+            pScore = GetValue(v: pCard1)
+            tempStringScore = playerScore.text ?? ""
+            tempIntScore = Int(tempStringScore) ?? 0
+            tempIntScore += pScore
+            playerScore.text = "\(tempIntScore)"
+            tempStringScore = ""
+            tempIntScore = 0
+            
+            card = Int.random(in: 1...52)
+            
+            let pCard2 = SetCard(c: card)
+            playerCard2.image = UIImage(named: "\(pCard2)")
+            pScore = GetValue(v: pCard2)
+            tempStringScore = playerScore.text ?? ""
+            tempIntScore = Int(tempStringScore) ?? 0
+            tempIntScore += pScore
+            playerScore.text = "\(tempIntScore)"
+            tempStringScore = ""
+            tempIntScore = 0
+            
+            card = Int.random(in: 1...52)
+            
+            let dCard1 = SetCard(c: card)
+            dealerCard1.image = UIImage(named: "\(dCard1)")
+            dScore = GetValue(v: dCard1)
+            tempStringScore = dealerScore.text ?? ""
+            tempIntScore = Int(tempStringScore) ?? 0
+            tempIntScore += dScore
+            dealerScore.text = "\(tempIntScore)"
+            tempStringScore = ""
+            tempIntScore = 0
+            
+            card = Int.random(in: 1...52)
+            
+            let dCard2 = SetCard(c: card)
+            dealerCard2.image = UIImage(named: "\(dCard2)")
+            dScore = GetValue(v: dCard2)
+            tempStringScore = dealerScore.text ?? ""
+            tempIntScore = Int(tempStringScore) ?? 0
+            tempIntScore += dScore
+            dealerScore.text = "\(tempIntScore)"
+            tempStringScore = ""
+            tempIntScore = 0
+        } else {
+            let alert = UIAlertController(title: "NOT ENOUGH POINTS", message: "Time to go back to work!!", preferredStyle: .alert)
+            let dismissAction = UIAlertAction(title: "Close", style: .default, handler: nil);
+            alert.addAction(dismissAction);
+            
+            present(alert, animated: true, completion: nil);
+            
+        }
         
     }
     
@@ -115,6 +157,8 @@ class GameViewController: UIViewController {
             playerScore.text = "\(tempIntScore)"
             tempStringScore = ""
             tempIntScore = 0
+            playerCard3.isHidden = false
+            PlayerBust()
         case 2:
             hitCounter = hitCounter + 1
             card = Int.random(in: 1...52)
@@ -128,6 +172,8 @@ class GameViewController: UIViewController {
             playerScore.text = "\(tempIntScore)"
             tempStringScore = ""
             tempIntScore = 0
+            playerCard4.isHidden = false
+            PlayerBust()
         case 3:
             hitCounter = hitCounter + 1
             card = Int.random(in: 1...52)
@@ -141,8 +187,11 @@ class GameViewController: UIViewController {
             playerScore.text = "\(tempIntScore)"
             tempStringScore = ""
             tempIntScore = 0
+            playerCard5.isHidden = false
+            PlayerBust()
         default:
-            print("out of bounds")
+            print("At Card Limit, Dealers Turn")
+            //Call Stay Function
 
         }
         
@@ -157,12 +206,13 @@ class GameViewController: UIViewController {
         // Do any additional setup after loading the view.
         playerName.text = "\(RegisterViewController.shared.playerName)"
         
+        
         let specialThanks = playerName.text
         GameViewController.shared.specialThanksName = "\(specialThanks!)"
        
     }
     
-
+   
     /*
     // MARK: - Navigation
 
@@ -172,6 +222,52 @@ class GameViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func PlayerBust (){
+        tempStringScore = playerScore.text ?? ""
+        tempIntScore = Int(tempStringScore) ?? 0
+        if tempIntScore > 21 {
+            buttonHit.isHidden = true;
+            buttonStay.isHidden = true;
+            
+            tempStringPoints = playerPoints.text ?? ""
+            tempIntPoints = Int(tempStringPoints) ?? 0
+            tempIntPoints = tempIntPoints - 50
+            playerPoints.text = "\(tempIntPoints)"
+            
+            
+            let alert = UIAlertController(title: "DEALER WINS!", message: "You busted!", preferredStyle: .alert)
+            let dismissAction = UIAlertAction(title: "Close", style: .default, handler: nil);
+            alert.addAction(dismissAction);
+            
+            present(alert, animated: true, completion: nil);
+        }
+        tempStringScore = ""
+        tempIntScore = 0
+        buttonRestart.isHidden = false
+    }
+    
+    func DealerBust (){
+        tempStringScore = dealerScore.text ?? ""
+        tempIntScore = Int(tempStringScore) ?? 0
+        if tempIntScore > 21 {
+            buttonHit.isHidden = true;
+            buttonStay.isHidden = true;
+            
+            tempStringPoints = playerPoints.text ?? ""
+            tempIntPoints = Int(tempStringPoints) ?? 0
+            tempIntPoints = tempIntPoints + 50
+            playerPoints.text = "\(tempIntPoints)"
+            
+            let alert = UIAlertController(title: "PLAYER WINS", message: "Dealer busted!", preferredStyle: .alert)
+            let dismissAction = UIAlertAction(title: "Close", style: .default, handler: nil);
+            alert.addAction(dismissAction);
+            
+            present(alert, animated: true, completion: nil);
+        }
+        tempStringScore = ""
+        tempIntScore = 0
+    }
     
    func SetCard(c: Int) -> String{
         var newCard = ""
