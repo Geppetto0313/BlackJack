@@ -9,10 +9,13 @@ import UIKit
 
 class CreditViewController: UIViewController {
 
+    @IBOutlet weak var specialThanksLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        specialThanksLabel.text = "\(GameViewController.shared.specialThanksName)"
     }
     
 

@@ -11,6 +11,9 @@ class RegisterViewController: UIViewController {
 
     @IBOutlet weak var nameTxtField: UITextField!
     
+    static let shared = RegisterViewController()
+    var playerName = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,7 +36,7 @@ class RegisterViewController: UIViewController {
         
         let msg = "\(userName!)";
         
-        
+        RegisterViewController.shared.playerName = "\(userName!)"
         
         let alert = UIAlertController(title: "Welcome", message: msg, preferredStyle: .alert)
         let dismissAction = UIAlertAction(title: "Close", style: .default, handler: nil);
