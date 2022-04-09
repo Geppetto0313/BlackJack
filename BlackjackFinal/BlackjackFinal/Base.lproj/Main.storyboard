@@ -146,15 +146,6 @@
                                 <rect key="frame" x="259" y="474" width="50" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h3a-NV-zS7">
-                                <rect key="frame" x="109" y="350" width="200" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                <state key="normal" title="Restart"/>
-                                <connections>
-                                    <action selector="btnRestart:" destination="9mU-5z-Qe5" eventType="touchUpInside" id="AXe-v6-uwa"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="QfD-Dy-Rch"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -162,7 +153,6 @@
                     <tabBarItem key="tabBarItem" title="Game" image="chess-castle" landscapeImage="chess-castle" largeContentSizeImage="chess-castle" id="ewr-3w-DTD"/>
                     <connections>
                         <outlet property="buttonHit" destination="Vl8-bc-7Qc" id="Zcd-bm-gQq"/>
-                        <outlet property="buttonRestart" destination="h3a-NV-zS7" id="b5s-Yh-LcG"/>
                         <outlet property="buttonStart" destination="Wsj-EC-opO" id="2nV-na-mLy"/>
                         <outlet property="buttonStay" destination="jfy-Gu-EDf" id="SZh-tM-dmc"/>
                         <outlet property="dealerCard1" destination="Ch5-Wl-0cA" id="rBb-uv-f4V"/>
